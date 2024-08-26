@@ -7,7 +7,10 @@ const app = express();
 dotenv.config(); // Initialize dotenv
 const port = process.env.PORT;
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(router);
+
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB connected");
