@@ -37,6 +37,32 @@ UserSchema.methods.isPasswordCorrect = async function (password) {
     const isMatch = await compare(password, this.password);
     return isMatch;
 };
+UserSchema.methods.generateAccessToken = function () {
+    return sign(
+        {
+            _id: this._id,
+            email: this.email,
+            username: this.username
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    );
+};
+
+UserSchema.methods.generateRefreshToken = function () {
+    return sign(
+        {
+            _id: this._id
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    );
+};
+
 
 const User = mongoose.model("User", UserSchema);
 
