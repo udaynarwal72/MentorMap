@@ -16,6 +16,7 @@ export const checkAuthSelector = selector({
     try {
       const response = await fetch(`http://localhost:3000/api/v1/user/checkauth`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

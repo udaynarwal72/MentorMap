@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const UserLogin = () => {
     const [email, setEmail] = useState(''); // Added state for email
@@ -19,8 +20,9 @@ const UserLogin = () => {
                 password
             });
             if (response.data.success) {
-                localStorage.setItem('token', response.data.data.accessToken);
-                navigate('/');
+                Cookies.set('accessToken', `${response.data.data.accessToken}`, { expires: 7 });
+                // localStorage.setItem('token', response.data.data.accessToken);
+                window.location.href = '/';
             } else {
                 setErrorMessage(response.data.data.message);
             }
