@@ -14,10 +14,10 @@ import ContactUs from './pages/RibbonPage/ContactUs.jsx';
 import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
 import Chatbot from './pages/RibbonPage/Chatbot.jsx';
-import BlogPage from './pages/User/BlogPage.jsx';
+import BlogPage from './pages/User/Blogpage.jsx';
 import BlogSubmitForm from './pages/User/Blogsubmit.jsx';
 import Community from './pages/User/CommunityPage.jsx';
-import FAQ from './pages/User/FAQ.jsx';
+import FAQ from './pages/User/faq.jsx';
 import MentorList from './pages/User/Mentorlist.jsx';
 import VideoCall from './pages/User/VideoCall.jsx';
 
