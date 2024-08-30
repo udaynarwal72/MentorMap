@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaUsers, FaComments } from "react-icons/fa";
 import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/NavBar/Footer";
 
 const Community = () => {
   return (
@@ -42,10 +43,7 @@ const Community = () => {
         </Link>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-16 py-6 bg-blue-900 w-full text-center text-blue-300 text-sm">
-        © 2024 MentorConnect. All rights reserved.
-      </footer>
+      <Footer/>
     </div>
   );
 };

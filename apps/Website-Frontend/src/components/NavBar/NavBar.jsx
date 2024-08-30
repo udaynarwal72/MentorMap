@@ -40,7 +40,7 @@ const NavBar = () => {
             <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4">
                 {/* Logo or Brand Name */}
                 <div className="text-white text-2xl font-bold">
-                    MentorConnect
+                    MentorSync
                 </div>
 
                 {/* Navigation Links */}
@@ -60,6 +60,21 @@ const NavBar = () => {
                             Contact Us
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/communityPage" className="text-white font-medium hover:text-blue-300 transition duration-200">
+                            Community
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/faq" className="text-white font-medium hover:text-blue-300 transition duration-200">
+                            FAQs
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/blogpage" className="text-white font-medium hover:text-blue-300 transition duration-200">
+                            Blog
+                        </Link>
+                    </li>
                 </ul>
 
                 {/* Search Bar */}
@@ -77,8 +92,8 @@ const NavBar = () => {
                 {/* User Profile or Login */}
                 <div className="flex items-center space-x-4 md:space-x-6">
                     {!auth?.user ? (
-                        <Link to="/login" className="text-white font-medium hover:text-blue-300 transition duration-200">
-                            Login
+                        <Link to="/Signup" className="text-white font-medium hover:text-blue-300 transition duration-200">
+                            Login/SignUp
                         </Link>
                     ) : (
                         <div className="flex items-center space-x-4">

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import Footer from "../../components/NavBar/Footer";
 const UserProfile = () => {
     const { userId } = useParams();
     const [user, setUser] = useState({});
@@ -73,6 +73,7 @@ const UserProfile = () => {
                 </div>
               </div>
             )}
+            <Footer/>
         </>
     );
 };
