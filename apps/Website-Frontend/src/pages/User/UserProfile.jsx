@@ -34,7 +34,7 @@ const UserProfile = () => {
                   <div className="flex flex-col items-center">
                     {/* Placeholder Profile Photo */}
                     <img
-                      src="https://via.placeholder.com/150" // Dummy photo URL
+                      src={user.avatar} // Dummy photo URL
                       alt="User Profile"
                       className="w-32 h-32 rounded-full object-cover border-4 border-blue-500 mb-6"
                     />

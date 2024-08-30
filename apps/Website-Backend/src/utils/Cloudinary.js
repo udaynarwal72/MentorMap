@@ -5,7 +5,6 @@ import { v2 as cloudinary } from 'cloudinary';
 import path from 'path';
 dotenv.config();
 
-
 config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -14,6 +13,10 @@ config({
 
 const uploadOnCloudinary = async (localFilePath) => {
     try {
+        console.log(process.env.CLOUD_NAME);
+        console.log(process.env.CLOUD_API_KEY);
+        console.log(process.env.CLOUD_API_SECRET);
+        console.log("Image uploading");
         if (!localFilePath) return null;
         // Upload the file to Cloudinary
         const result = await uploader.upload(localFilePath, {
@@ -22,6 +25,7 @@ const uploadOnCloudinary = async (localFilePath) => {
         // File has been successfully uploaded
         console.log("File is uploaded to Cloudinary", result.url);
         unlinkSync(localFilePath)
+        console.log("Image uploaded successfully");
         return result;
     } catch (error) {
         // Remove the locally saved temporary file as the upload operation got failed

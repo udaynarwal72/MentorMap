@@ -1,5 +1,7 @@
 import User from "../../schema/UserSchema.js";
 import ApiResponse from "../../utils/ApiResponse.js";
+import { uploadOnCloudinary } from "../../utils/Cloudinary.js"
+import { unlinkSync } from "fs";
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId);
@@ -12,65 +14,72 @@ const generateAccessAndRefreshTokens = async (userId) => {
         return ApiError(500, "Something went wrong while generating refresh and access token");
     }
 };
-const userSignUp = (req, res) => {
-    const { username,
-        password,
-        firstname,
-        lastname,
-        phone_number,
-        email,
-        user_role,
-        interest,
-        confirm_password } = req.body;
 
-    if (password !== confirm_password) {
-        res.send({ message: "Password didn't match" });
-    }
-    const generatedInterest = interest.split(",");
-    const user = User.create({
-        username,
-        password,
-        firstname,
-        lastname,
-        phone_number,
-        email,
-        user_role,
-        interest: generatedInterest,
-    })
-    if (user) {
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false, // True for 465, false for other ports
-            auth: {
-                user: process.env.ADMIN_MAIL,
-                pass: process.env.ADMIN_PASSWORD,
-            },
+const userSignUp = async (req, res) => {
+    try {
+        const {
+            username,
+            password,
+            firstname,
+            lastname,
+            phone_number,
+            email,
+            user_role,
+            interest,
+            confirm_password
+        } = req.body;
+
+        if (password !== confirm_password) {
+            return res.status(400).send({ message: "Passwords do not match" });
+        }
+
+        console.log("This is user file");
+
+        // Initialize avatarPath to undefined
+        let avatarPath;
+        // Log uploaded files
+        console.log(req.files.avatar[0].path);
+
+        // Check if files are uploaded and assign the path of the first file to avatarPath
+        if (req.files) {
+            avatarPath = req.files.avatar[0].path;
+        }
+        console.log(avatarPath);
+
+        // Upload avatar to Cloudinary and get the URL
+        const userAvatarImageUrl = avatarPath ? await uploadOnCloudinary(avatarPath) : null;
+
+        // Remove the avatar file from the local storage if it exists
+        // if (avatarPath) {
+        //     unlinkSync(avatarPath);
+        // }
+        // Generate an array of interests from a comma-separated string
+        const generatedInterest = interest.split(",");
+
+        // Create a new user record
+        const user = await User.create({
+            username,
+            password,
+            firstname,
+            lastname,
+            phone_number,
+            email,
+            avatar: userAvatarImageUrl ? userAvatarImageUrl.secure_url : null,
+            user_role,
+            interest: generatedInterest,
         });
 
-        let mailOptions = {
-            from: {
-                name: 'Mentor Sync',
-                address: process.env.ADMIN_MAIL
-            },
-            to: createdUser.email,
-            subject: 'Welcome to Mentor Sync!',
-            html: `Welcome to Mentor Sync!<br/>
-            ${createdUser.firstname} ${createdUser.lastname} we're currently in the process of verifying your details. Thank you for your patience as we complete this process.<br/>
-            Regards,<br/>
-            Team HackElite
-            `
-        };
-        try {
-             transporter.sendMail(mailOptions);
-            console.log('Email sent successfully');
-        } catch (error) {
-            console.error('Error sending email:', error);
-        }
+        // Send a success message with the created user
+        res.status(201).send({ message: "User created successfully", user });
+    } catch (error) {
+        console.error("Error creating user:", error);
+        res.status(500).send({ message: "An error occurred during user creation", error });
     }
+
     res.send({ user, message: "User created" });
-}
+
+};
+
 
 
 const userLogin = async (req, res, next) => {
