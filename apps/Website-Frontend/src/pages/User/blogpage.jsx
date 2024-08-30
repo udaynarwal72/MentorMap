@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
-
+import Footer from "../../components/NavBar/Footer";
 const BlogPage = () => {
-  // Sample data for articles
   const articles = [
     {
       id: 1,
@@ -17,16 +16,64 @@ const BlogPage = () => {
       summary: "A comprehensive guide to improving your JavaScript skills.",
       link: "/articles/mastering-javascript-tips-and-tricks",
     },
-    // Add more articles here
+    {
+      id: 2,
+      title: "Mastering JavaScript: Tips and Tricks",
+      summary: "A comprehensive guide to improving your JavaScript skills.",
+      link: "/articles/mastering-javascript-tips-and-tricks",
+    },
+    {
+      id: 2,
+      title: "Mastering JavaScript: Tips and Tricks",
+      summary: "A comprehensive guide to improving your JavaScript skills.",
+      link: "/articles/mastering-javascript-tips-and-tricks",
+    },
+    {
+      id: 2,
+      title: "Mastering JavaScript: Tips and Tricks",
+      summary: "A comprehensive guide to improving your JavaScript skills.",
+      link: "/articles/mastering-javascript-tips-and-tricks",
+    },
+
   ];
 
+    // const BlogPage = () => {
+  
+    // const [articles, setarticles] = useState([]);
+    // const [loading, setLoading] = useState(true); 
+    // const [error, setError] = useState(null); 
+  
+    
+    // useEffect(() => {
+    //   const fetcharticles = async () => {
+    //     try {
+    //       const response = await fetch("/blogpage");
+    //       if (!response.ok) {
+    //         throw new Error("Failed to fetch mentors");
+    //       }
+    //       const data = await response.json();
+    //       setarticles(data);
+    //     } catch (err) {
+    //       setError(err.message);
+    //     } finally {
+    //       setLoading(false);
+    //     }
+    //   };
+  
+    //   fetcharticles();
+    // }, []);
+  
+    // if (loading) return <div>Loading...</div>; 
+    // if (error) return <div>Error: {error}</div>;  
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300">
+    <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center text-white relative">
+    
       {/* Navigation Bar */}
       <NavBar />
 
       <main className="flex-grow py-12 px-6">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
+        <h1 className="text-4xl font-bold text-center text-white-800 mb-10">
           Blogs
         </h1>
 
@@ -51,10 +98,7 @@ const BlogPage = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-6 bg-gray-800 w-full text-center text-white text-sm">
-        © 2024 MentorConnect. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 };

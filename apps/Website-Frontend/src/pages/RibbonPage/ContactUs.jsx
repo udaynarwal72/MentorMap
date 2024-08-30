@@ -25,7 +25,7 @@ const ContactUs = () => {
     return (
         <>
             <NavBar />
-            <div className="bg-gradient-to-r from-blue-200 to-blue-400 min-h-screen flex flex-col items-center py-8 px-4">
+            <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center text-white relative">
                 <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
                     <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Contact Us</h2>
                     <div className="mb-8">
