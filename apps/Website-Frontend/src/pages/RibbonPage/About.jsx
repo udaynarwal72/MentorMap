@@ -5,7 +5,8 @@ const About = () => {
     return (
         <>
             <NavBar />
-            <div className="bg-gradient-to-r from-blue-50 to-blue-200 min-h-screen p-8">
+            <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center text-white relative py-20">
+    
                 <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
                     <h1 className="text-3xl font-bold text-blue-600 mb-6">About Us</h1>
                     <p className="text-lg text-gray-600 mb-4">
