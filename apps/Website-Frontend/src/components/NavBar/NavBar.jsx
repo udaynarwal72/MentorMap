@@ -46,7 +46,7 @@ const NavBar = () => {
                 {/* Navigation Links */}
                 <ul className="flex items-center space-x-6 md:space-x-8">
                     <li>
-                        <Link to="/home" className="text-white font-medium hover:text-blue-300 transition duration-200">
+                        <Link to="/" className="text-white font-medium hover:text-blue-300 transition duration-200">
                             Home
                         </Link>
                     </li>

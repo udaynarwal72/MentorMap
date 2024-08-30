@@ -24,7 +24,7 @@ import VideoCall from './pages/User/videoCall.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <Home />
   },
   {
     path: "/login",
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element:<ContactUs/>
   },{
     path:"/home",
-    element:<Home/>
+    element:<App/>
   },
   {
     path:"/signup",

@@ -148,10 +148,28 @@ const findUserById = async (req, res) => {
     }
 };
 
+const deleteUserById = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const user = await User.findByIdAndDelete(userId);  // Added await to handle the asynchronous call
+
+        if (!user) {  // Check if user is not found
+            return res.status(404).send({ error: "User not found" });
+        }
+
+        res.send({ user });
+    }
+    catch (error) {
+        console.error("Error deleting user:", error);
+        res.status(500).send({ error: "An error occurred while deleting the user" });
+    }
+}
+
 
 export {
     userSignUp,
     userLogin,
     checkAuthentication,
-    findUserById
+    findUserById,
+    deleteUserById
 }
