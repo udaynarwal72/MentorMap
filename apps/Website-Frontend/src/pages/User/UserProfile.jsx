@@ -29,41 +29,49 @@ const UserProfile = () => {
         <>
             <NavBar />
             {user && (
-                <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-                    <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-                        <h2 className="text-3xl font-semibold text-gray-900 mb-4">User Profile</h2>
-                        <div className="space-y-4">
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">First Name: </span>{user.firstname}
-                            </div>
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">Last Name: </span>{user.lastname}
-                            </div>
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">Email: </span>{user.email}
-                            </div>
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">Phone Number: </span>{user.phone_number}
-                            </div>
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">Username: </span>{user.username}
-                            </div>
-                            <div className="text-lg text-gray-700">
-                                <span className="font-bold">User Role: </span>{user.user_role}
-                            </div>
-                            {user.interest && (
-                                <div className="text-lg text-gray-700">
-                                    <span className="font-bold">Interests: </span>
-                                    <ul className="list-disc list-inside">
-                                        {user.interest.map((interest, index) => (
-                                            <li key={index}>{interest}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
+                <div className="bg-gradient-to-r from-blue-100 to-blue-300 min-h-screen flex justify-center items-center py-12">
+                <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-lg border border-blue-200">
+                  <div className="flex flex-col items-center">
+                    {/* Placeholder Profile Photo */}
+                    <img
+                      src="https://via.placeholder.com/150" // Dummy photo URL
+                      alt="User Profile"
+                      className="w-32 h-32 rounded-full object-cover border-4 border-blue-500 mb-6"
+                    />
+                    <h2 className="text-3xl font-bold text-blue-900 mb-4">User Profile</h2>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">First Name: </span>{user.firstname}
                     </div>
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">Last Name: </span>{user.lastname}
+                    </div>
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">Email: </span>{user.email}
+                    </div>
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">Phone Number: </span>{user.phone_number}
+                    </div>
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">Username: </span>{user.username}
+                    </div>
+                    <div className="text-lg text-gray-800">
+                      <span className="font-semibold text-blue-600">User Role: </span>{user.user_role}
+                    </div>
+                    {user.interest && (
+                      <div className="text-lg text-gray-800">
+                        <span className="font-semibold text-blue-600">Interests: </span>
+                        <ul className="list-disc list-inside pl-5">
+                          {user.interest.map((interest, index) => (
+                            <li key={index} className="text-blue-700">{interest}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
+              </div>
             )}
         </>
     );
