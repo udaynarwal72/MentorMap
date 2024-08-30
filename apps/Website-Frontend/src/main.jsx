@@ -14,6 +14,13 @@ import ContactUs from './pages/RibbonPage/ContactUs.jsx';
 import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
 import Chatbot from './pages/RibbonPage/Chatbot.jsx';
+import BlogPage from './pages/User/BlogPage.jsx';
+import BlogSubmitForm from './pages/User/Blogsubmit.jsx';
+import Community from './pages/User/CommunityPage.jsx';
+import FAQ from './pages/User/FAQ.jsx';
+import MentorList from './pages/User/Mentorlist.jsx';
+import VideoCall from './pages/User/VideoCall.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +50,30 @@ const router = createBrowserRouter([
   {
     path:"/chat",
     element:<Chatbot/>
+  }
+  ,{
+    path:"/blogpage",
+    element:<BlogPage/>
+  }
+  ,{
+    path:"/blogsubmit",
+    element:<BlogSubmitForm/>
+  }
+  ,{
+    path:"/communitypage",
+    element:<Community/>
+  }
+  ,{
+    path:"/faq",
+    element:<FAQ/>
+  }
+  ,{
+    path:"/mentorlist",
+    element:<MentorList/>
+  }
+  ,{
+    path:"/videocall",
+    element:<VideoCall/>
   }
 ]);
 
