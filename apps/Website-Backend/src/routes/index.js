@@ -1,30 +1,22 @@
-import Express from "express";
+import Express, { response } from "express";
 import UserRouter from "./UserRoutes.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 const router = Express.Router();
 
 router.get("/", (req, res) => {
     res.send("API is working");
 });
-app.post('/chat', async (req, res) => {
-    const { message } = req.body;
+router.post('/chat', async (req, res) => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    try {
-        const response = await axios.post('https://api.gemini.com/ask', {
-            question: message
-        }, {
-            headers: {
-                'Authorization': `Bearer ${process.env.GEMINI_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
+    const prompt = "Help me with this statement:" + req.body.message;
 
-        res.json({ reply: response.data.answer });
-    } catch (error) {
-        console.error('Error communicating with Gemini:', error);
-        res.status(500).json({ reply: 'Sorry, something went wrong. Please try again later.' });
-    }
+    const result = await model.generateContent(prompt);
+    console.log(result.response.text());
+    res.send({ message: result.response.text() });
 });
 
-router.use("/api/v1/user",UserRouter);
+router.use("/api/v1/user", UserRouter);
 
 export default router;

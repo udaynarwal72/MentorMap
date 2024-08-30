@@ -19,15 +19,13 @@ const Chatbot = () => {
                 },
                 body: JSON.stringify({ message }),
             });
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
 
             const data = await response.json();
 
-            // Check if reply is available in the response
-            const reply = data.reply || 'No reply from server';
+            const reply = data.message || 'No reply from server';
             setMessages([...messages, { content: message, sender: 'user' }, { content: reply, sender: 'bot' }]);
         } catch (error) {
             console.error('Error sending message:', error);
