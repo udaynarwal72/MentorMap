@@ -13,6 +13,7 @@ import About from './pages/RibbonPage/About.jsx';
 import ContactUs from './pages/RibbonPage/ContactUs.jsx';
 import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
+import Chatbot from './pages/RibbonPage/Chatbot.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path:"/signup",
     element:<UserSignUp/>
+  },
+  {
+    path:"/chat",
+    element:<Chatbot/>
   }
 ]);
 
