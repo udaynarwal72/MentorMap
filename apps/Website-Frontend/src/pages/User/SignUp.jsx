@@ -4,24 +4,28 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const UserLogin = () => {
-    const [email, setEmail] = useState(''); // Added state for email
-    const [password, setPassword] = useState(''); // Added state for password
+const UserSignUp = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const onHandleSubmit = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            setErrorMessage("Passwords do not match.");
+            return;
+        }
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/user/userlogin', {
+            const response = await axios.post('http://localhost:3000/api/v1/user/usersignup', {
                 email,
                 password
             });
             if (response.data.success) {
                 Cookies.set('accessToken', `${response.data.data.accessToken}`, { expires: 7 });
-                // localStorage.setItem('token', response.data.data.accessToken);
                 window.location.href = '/';
             } else {
                 setErrorMessage(response.data.data.message);
@@ -38,8 +42,8 @@ const UserLogin = () => {
             <NavBar />
             <div className="bg-gray-100 flex justify-center items-center min-h-screen">
                 <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome</h2>
-                    <p className="text-gray-600 mb-6">We are happy to have you</p>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2">Sign Up</h2>
+                    <p className="text-gray-600 mb-6">Create a new account</p>
                     <form className="space-y-4" onSubmit={onHandleSubmit}>
                         <input
                             type="email"
@@ -47,7 +51,7 @@ const UserLogin = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             name="email"
                             placeholder="Email"
-                            value={email} // Added value prop for controlled component
+                            value={email}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -57,7 +61,17 @@ const UserLogin = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             name="password"
                             placeholder="Password"
-                            value={password} // Added value prop for controlled component
+                            value={password}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -66,9 +80,6 @@ const UserLogin = () => {
                                 {errorMessage}
                             </div>
                         )}
-                        <div className="flex justify-between items-center text-sm">
-                            <a href="/entermail" className="text-blue-500 hover:underline">Forgot Password?</a>
-                        </div>
                         <button
                             type="submit"
                             className={`w-full py-2 text-white rounded-md ${loading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'}`}
@@ -79,11 +90,11 @@ const UserLogin = () => {
                                     <span className="mr-2">Loading...</span>
                                     <div className="animate-spin h-5 w-5 border-4 border-t-transparent border-white rounded-full"></div>
                                 </div>
-                            ) : 'Login'}
+                            ) : 'Sign Up'}
                         </button>
                     </form>
                     <div className="mt-4 text-sm text-center">
-                        <p className="text-gray-600">Don't have an account? <a href="/Signup" className="text-blue-500 hover:underline">Sign Up</a></p>
+                        <p className="text-gray-600">Already have an account? <a href="/Login" className="text-blue-500 hover:underline">Log In</a></p>
                     </div>
                 </div>
             </div>
@@ -91,4 +102,4 @@ const UserLogin = () => {
     );
 }
 
-export default UserLogin;
+export default UserSignUp;

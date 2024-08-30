@@ -11,7 +11,8 @@ import { RecoilRoot } from 'recoil';
 import UserProfile from "./pages/User/UserProfile.jsx"
 import About from './pages/RibbonPage/About.jsx';
 import ContactUs from './pages/RibbonPage/ContactUs.jsx';
-
+import Home from './pages/RibbonPage/Home.jsx';
+import UserSignUp from './pages/User/SignUp.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
   },{
     path:"/contact",
     element:<ContactUs/>
+  },{
+    path:"/home",
+    element:<Home/>
+  },
+  {
+    path:"/signup",
+    element:<UserSignUp/>
   }
 ]);
 
