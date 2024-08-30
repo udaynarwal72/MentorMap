@@ -13,12 +13,7 @@ import About from './pages/RibbonPage/About.jsx';
 import ContactUs from './pages/RibbonPage/ContactUs.jsx';
 import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
-import CommunityPage from './pages/User/communityPage.jsx';
-import VideoCall from './pages/User/videoCall.jsx';
-import FAQ from './pages/User/faq.jsx';
-import MentorList from './pages/User/mentorlist.jsx';
-import BlogPage from './pages/User/blogpage.jsx';
-import BlogSubmitForm from './pages/User/blogsubmit.jsx';
+import Chatbot from './pages/RibbonPage/Chatbot.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,29 +41,9 @@ const router = createBrowserRouter([
     element:<UserSignUp/>
   },
   {
-    path:"/communitypage",
-    element:<CommunityPage/>
-  },
-  {
-    path:"/videocall",
-    element:<VideoCall/>
-  },
-  {
-    path:"/faq",
-    element:<FAQ/>
-  },
-  {
-    path:"/mentorlist",
-    element:<MentorList/>
-  },
-  {
-    path:"blogpage",
-    element:<BlogPage/>
-  },
-  {
-    path:"blogsubmit",
-    element:<BlogSubmitForm/>
-  },
+    path:"/chat",
+    element:<Chatbot/>
+  }
 ]);
 
 
