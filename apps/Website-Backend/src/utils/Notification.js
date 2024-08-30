@@ -1,5 +1,5 @@
 import { getMessaging } from "firebase/messaging";
-import User from "../Schema/UserSchema.js";
+import User from "../schema/UserSchema.js";
 
 // These registration tokens come from the client FCM SDKs.
 const getAllNotificationTokens = async () => {

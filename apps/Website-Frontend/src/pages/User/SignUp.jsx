@@ -1,16 +1,23 @@
 import { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const UserSignUp = () => {
+    const [username, setUsername] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [userRole, setUserRole] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [interest, setInterest] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [avatar, setAvatar] = useState(null); 
+    const [avatarPreview, setAvatarPreview] = useState('');
+
 
     const onHandleSubmit = async (e) => {
         e.preventDefault();
@@ -21,8 +28,19 @@ const UserSignUp = () => {
         setLoading(true);
         try {
             const response = await axios.post('http://localhost:3000/api/v1/user/usersignup', {
-                email,
-                password
+                method:'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    firstname,
+                    lastname,
+                    phone_number: phoneNumber,
+                    email,
+                    userRole,
+                    interest: interest.split(','),
+                    avatar: avatar
+                }),
             });
             if (response.data.success) {
                 Cookies.set('accessToken', `${response.data.data.accessToken}`, { expires: 7 });
@@ -32,8 +50,16 @@ const UserSignUp = () => {
             }
         } catch (error) {
             setErrorMessage("An error occurred. Please try again.");
+            console.log('Signup Error' ,error);
         } finally {
             setLoading(false);
+        }
+    };
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          setAvatar(file);
+          setAvatarPreview(URL.createObjectURL(file));
         }
     };
 
@@ -45,12 +71,56 @@ const UserSignUp = () => {
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Sign Up</h2>
                     <p className="text-gray-600 mb-6">Create a new account</p>
                     <form className="space-y-4" onSubmit={onHandleSubmit}>
+                    {avatarPreview && <img src={avatarPreview} alt="Avatar Preview"  />}
+
+                       <input
+                            type="file"
+                            id="avatar"
+                            accept="image/*"
+                            onChange={(handleAvatarChange)}
+                            placeholder="avatar"
+                            value={avatar}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            name="username"
+                            placeholder="username"
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <div className="flex space-x-4">
+                        <input
+                            type="text"
+                            id="firstname"
+                            value={firstname}
+                            onChange={(e) => setFirstname(e.target.value)}
+                            placeholder="firstname"
+                            name="firstname"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        <input
+                            type="text"
+                            id="lastname"
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}
+                            name="lastname"
+                            placeholder="lastname"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        </div>
                         <input
                             type="email"
                             id="email"
                             onChange={(e) => setEmail(e.target.value)}
                             name="email"
-                            placeholder="Email"
+                            placeholder="email"
                             value={email}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -60,7 +130,7 @@ const UserSignUp = () => {
                             id="password"
                             onChange={(e) => setPassword(e.target.value)}
                             name="password"
-                            placeholder="Password"
+                            placeholder="password"
                             value={password}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -70,10 +140,40 @@ const UserSignUp = () => {
                             id="confirmPassword"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             name="confirmPassword"
-                            placeholder="Confirm Password"
+                            placeholder="confirmpassword"
                             value={confirmPassword}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <input
+                            type="text"
+                            id="interest"
+                            value={interest}
+                            onChange={(e) => setInterest(e.target.value)}
+                            name="interest"
+                            placeholder="interest"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                       <input
+                            type="text"
+                            id="phone_number"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            name="phone_number"
+                            placeholder="phoneNumber"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        <input
+                            type="text"
+                            id="user_role"
+                            value={userRole}
+                            onChange={(e) => setUserRole(e.target.value)}
+                            name="userRole"
+                            placeholder="userRole"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
                         />
                         {errorMessage && (
                             <div className="text-red-500 text-sm">

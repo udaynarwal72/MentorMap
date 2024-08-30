@@ -37,8 +37,41 @@ const userSignUp = (req, res) => {
         user_role,
         interest: generatedInterest,
     })
+    if (user) {
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // True for 465, false for other ports
+            auth: {
+                user: process.env.ADMIN_MAIL,
+                pass: process.env.ADMIN_PASSWORD,
+            },
+        });
+
+        let mailOptions = {
+            from: {
+                name: 'Mentor Sync',
+                address: process.env.ADMIN_MAIL
+            },
+            to: createdUser.email,
+            subject: 'Welcome to Mentor Sync!',
+            html: `Welcome to Mentor Sync!<br/>
+            ${createdUser.firstname} ${createdUser.lastname} we're currently in the process of verifying your details. Thank you for your patience as we complete this process.<br/>
+            Regards,<br/>
+            Team HackElite
+            `
+        };
+        try {
+             transporter.sendMail(mailOptions);
+            console.log('Email sent successfully');
+        } catch (error) {
+            console.error('Error sending email:', error);
+        }
+    }
     res.send({ user, message: "User created" });
 }
+
 
 const userLogin = async (req, res, next) => {
     const { email, password } = req.body;
@@ -110,10 +143,63 @@ const findUserById = async (req, res) => {
     }
 };
 
+const userContactUs = async (req, res) => {
+    const { name, email, message } = req.body;
+
+    console.log(process.env.ADMIN_MAIL + process.env.ADMIN_PASSWORD)
+
+
+    if (name && email && message) {
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, 
+            auth: {
+                user: process.env.ADMIN_MAIL,
+                pass: process.env.ADMIN_PASSWORD,
+            },
+        });
+
+        transporter.verify(function (error,success){
+            if (error) {
+                console.error('Transporter verification failed:', error);
+            return res.status(500).send({ message: "Transporter verification failed", error });
+            }
+            else {
+            console.log('Server is ready to take our messages:', success);
+            }
+        });
+
+        let mailOptions = {
+            from: {
+                name: 'Mentor Sync',
+                address: process.env.ADMIN_MAIL
+            },
+            to: "goelnancy14@gmail.com",
+            subject: `Contact Us query by ${name} (${email})`,
+            html: `<p>${message}</p>`
+        };
+
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('Email sent successfully');
+            res.status(200).send({ message: "Mail sent successfully" });
+        } catch (error) {
+            console.error('Error sending email:', error);
+            res.status(500).send({ message: "Error sending email", error });
+        }
+    } else {
+        res.status(400).send({ message: "Name, email, and message are required" });
+    }
+};
+
+
 
 export {
     userSignUp,
     userLogin,
     checkAuthentication,
-    findUserById
+    findUserById,
+    userContactUs
 }
