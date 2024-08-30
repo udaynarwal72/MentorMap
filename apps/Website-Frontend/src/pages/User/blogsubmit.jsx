@@ -31,6 +31,7 @@ const BlogSubmitForm = () => {
   };
 
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-b from-gray-100 via-gray-200 to-gray-300 flex items-center justify-center">
       <div className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Submit a New Blog Post</h1>
@@ -87,6 +88,8 @@ const BlogSubmitForm = () => {
         </form>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

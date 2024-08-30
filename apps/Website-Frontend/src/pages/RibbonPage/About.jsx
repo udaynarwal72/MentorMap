@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-
+import Footer from '../../components/NavBar/Footer';
 const About = () => {
     return (
         <>
@@ -20,6 +20,7 @@ const About = () => {
                     </p>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };

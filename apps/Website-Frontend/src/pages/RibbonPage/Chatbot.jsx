@@ -97,6 +97,12 @@ const Chatbot = () => {
             </button>
         </div>
     </div>
+    <div>
+    {/* Footer */}
+    <footer className="mt-16 py-6 bg-blue-900 w-full text-center text-blue-300 text-sm">
+        © 2024 MentorConnect. All rights reserved.
+      </footer>
+    </div>
             </>
     );
 };

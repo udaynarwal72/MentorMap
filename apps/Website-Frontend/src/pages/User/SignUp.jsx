@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Footer from "../../components/NavBar/Footer";
 
 const UserSignUp = () => {
     const [email, setEmail] = useState('');
@@ -98,6 +99,7 @@ const UserSignUp = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

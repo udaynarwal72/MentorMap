@@ -14,9 +14,9 @@ const FAQ = () => {
         <div className="space-y-8">
           {/* Question 1 */}
           <div>
-            <h2 className="text-2xl font-semibold text-blue-800">What is MentorConnect?</h2>
+            <h2 className="text-2xl font-semibold text-blue-800">What is Mentorsync?</h2>
             <p className="mt-2 text-gray-700">
-              MentorConnect is a platform designed to connect students with mentors in their field of interest, 
+              Mentorsync is a platform designed to sync students with mentors in their field of interest, 
               providing guidance, support, and valuable insights to help them achieve their goals.
             </p>
           </div>
@@ -32,9 +32,9 @@ const FAQ = () => {
 
           {/* Question 3 */}
           <div>
-            <h2 className="text-2xl font-semibold text-blue-800">Is there a fee for using MentorConnect?</h2>
+            <h2 className="text-2xl font-semibold text-blue-800">Is there a fee for using Mentorsync?</h2>
             <p className="mt-2 text-gray-700">
-              MentorConnect offers both free and paid mentorship options. 
+              Mentorsync offers both free and paid mentorship options. 
               Mentors set their own rates for paid sessions, and students can choose according to their budget.
             </p>
           </div>
@@ -52,7 +52,7 @@ const FAQ = () => {
 
       {/* Footer */}
       <footer className="py-6 bg-blue-800 w-full text-center text-white text-sm mt-auto">
-        © 2024 MentorConnect. All rights reserved.
+        © 2024 Mentorsync. All rights reserved.
       </footer>
     </div>
   );
