@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { authState, checkAuthSelector } from "../../recoil/Authuser";
 import { useEffect, useState } from "react";
 import { FaUserCircle, FaSearch } from 'react-icons/fa'; // Importing icons from react-icons
+import Cookies from "js-cookie";
 
 const NavBar = () => {
     const authStatus = useRecoilValueLoadable(checkAuthSelector);
@@ -30,7 +31,8 @@ const NavBar = () => {
         // Clear auth state and navigate to login or home page
         setAuth(null);
         localStorage.removeItem('token'); 
-        navigate("/login");
+        Cookies.remove('accessToken');
+        window.location.href = "/login";
     };
 
     return (
