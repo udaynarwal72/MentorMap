@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Footer from "../../components/NavBar/Footer";
 
 const UserLogin = () => {
     const [email, setEmail] = useState(''); // Added state for email
@@ -87,6 +88,7 @@ const UserLogin = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

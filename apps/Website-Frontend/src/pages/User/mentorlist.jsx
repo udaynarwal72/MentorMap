@@ -1,16 +1,15 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import NavBar from "../../components/NavBar/NavBar";
-
+import Footer from "../../components/NavBar/Footer";
 const MentorList = () => {
-  // Sample data for mentors
   const mentors = [
     {
       id: 1,
       name: "ABCDEF",
       title: "Senior Software Engineer",
       bio: "10+ years of experience in full-stack development.",
-      photo: "https://via.placeholder.com/150",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
       rating: 4.5,
     },
     {
@@ -18,11 +17,93 @@ const MentorList = () => {
       name: "QWIQWD",
       title: "Data Scientist",
       bio: "Expert in machine learning and data analytics.",
-      photo: "https://via.placeholder.com/150",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
       rating: 4.7,
     },
-    // Add more mentors here
+    {
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },
+    {
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },
+    {
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },
+    {
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },
+    {
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },{
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },{
+      id: 2,
+      name: "QWIQWD",
+      title: "Data Scientist",
+      bio: "Expert in machine learning and data analytics.",
+      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
+      rating: 4.7,
+    },
   ];
+
+  // const MentorList = () => {
+  
+  //   const [mentors, setMentors] = useState([]);
+  //   const [loading, setLoading] = useState(true); 
+  //   const [error, setError] = useState(null); 
+  
+    
+  //   useEffect(() => {
+  //     const fetchMentors = async () => {
+  //       try {
+  //         const response = await fetch("/mentorlist");
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch mentors");
+  //         }
+  //         const data = await response.json();
+  //         setMentors(data);
+  //       } catch (err) {
+  //         setError(err.message);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+  
+  //     fetchMentors();
+  //   }, []);
+  
+  //   if (loading) return <div>Loading...</div>; 
+  //   if (error) return <div>Error: {error}</div>; 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-100 to-gray-200">
@@ -38,7 +119,7 @@ const MentorList = () => {
           {mentors.map((mentor) => (
             <div
               key={mentor.id}
-              className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center"
+              className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center border border-blue-600"
             >
               <img
                 src={mentor.photo}
@@ -71,9 +152,7 @@ const MentorList = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 bg-gray-800 w-full text-center text-white text-sm mt-auto">
-        © 2024 MentorConnect. All rights reserved.
-      </footer>
+      <Footer/>
     </div>
   );
 };

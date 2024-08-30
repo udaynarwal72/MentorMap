@@ -17,6 +17,16 @@ router.post('/chat', async (req, res) => {
     res.send({ message: result.response.text() });
 });
 
+// router.get('/mentorlist', async (req, res) => {
+//     try {
+//       const mentors = await Mentor.find();
+//       res.status(200).json(mentors);
+//     } catch (error) {
+//       console.error('Error fetching mentor list:', error); 
+//       res.status(500).json({ error: 'Error fetching mentor list' });
+//     }
+//   });
+
 router.use("/api/v1/user", UserRouter);
 
 export default router;
