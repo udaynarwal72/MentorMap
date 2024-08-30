@@ -15,11 +15,11 @@ import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
 import Chatbot from './pages/RibbonPage/Chatbot.jsx';
 import BlogPage from './pages/User/BlogPage.jsx';
-import BlogSubmitForm from './pages/User/Blogsubmit.jsx';
+import BlogSubmitForm from './pages/User/blogsubmit.jsx';
 import Community from './pages/User/CommunityPage.jsx';
 import FAQ from './pages/User/FAQ.jsx';
-import MentorList from './pages/User/Mentorlist.jsx';
-import VideoCall from './pages/User/VideoCall.jsx';
+import MentorList from './pages/User/mentorlist.jsx';
+import VideoCall from './pages/User/videoCall.jsx';
 
 const router = createBrowserRouter([
   {
