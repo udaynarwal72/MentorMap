@@ -1,11 +1,11 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import router from "./src/routes/index.js";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import { Server } from "socket.io";
-import http from "http";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import router from './src/routes/index.js';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { Server } from 'socket.io';
+import http from 'http';
 
 // Initialize dotenv
 dotenv.config();
@@ -21,8 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(router);
 
-console.log("hi")
-console.log(process.env.MONGO_URI);
+  
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
