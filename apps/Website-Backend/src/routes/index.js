@@ -2,11 +2,26 @@ import Express, { response } from "express";
 import UserRouter from "./UserRoutes.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import BlogRouter from "./BlogRoutes.js";
+import axios from "axios";
 const router = Express.Router();
 
 router.get("/", (req, res) => {
     res.send("API is working");
 });
+
+router.get('/api/mentors/:mentorId/availability', async (req, res) => {
+    try {
+      const response = await axios.get(`https://calendly.com/api/v1/users/${req.params.mentorId}/event_types`, {
+        headers: {
+          'Authorization': `Bearer ${process.env.CALENDLY_API_KEY}`
+        }
+      });
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).send('Error fetching availability');
+    }
+  });
+
 router.post('/chat', async (req, res) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
