@@ -140,7 +140,7 @@ const findUserById = async (req, res) => {
     try {
         const user = await User.findById(userId);  // Added await to handle the asynchronous call
 
-        if (!user) {  // Check if user is not found
+        if (!user) {  // Check if user is not found 
             return res.status(404).send({ error: "User not found" });
         }
 
