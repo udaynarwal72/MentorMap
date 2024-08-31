@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     user_role: { type: String, enum: ["student", "mentor"], required: true },
     company: { type: String, required: false },
     useracct: { type: String, required: false },
-    usercalendlyacct: { type: String, required: false },
+    usercalendlyurl: { type: String, required: false },
     usernotificationtoken: { type: String, required: false },
     designation: { type: String, required: false }
 });

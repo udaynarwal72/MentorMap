@@ -27,7 +27,8 @@ const userSignUp = async (req, res) => {
             email,
             user_role,
             interest,
-            confirm_password
+            confirm_password,
+            usercalendlyurl
         } = req.body;
         console.log(req.files);
         if (password !== confirm_password) {
@@ -68,6 +69,7 @@ const userSignUp = async (req, res) => {
             avatar: userAvatarImageUrl ? userAvatarImageUrl.secure_url : null,
             user_role,
             skills: generatedSkills,
+            usercalendlyurl
         });
 
         // Send a success message with the created user
