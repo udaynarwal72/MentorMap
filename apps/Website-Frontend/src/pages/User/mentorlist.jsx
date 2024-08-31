@@ -16,7 +16,7 @@ const MentorList = () => {
           throw new Error("Failed to fetch mentors");
         }
         const result = await response.json();
-        setMentors(result.data);
+        setMentors(result.data.filter((user) => user.user_role === "mentor"));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -48,20 +48,20 @@ const MentorList = () => {
             >
               <img
                 src={mentor.avatar || "https://via.placeholder.com/150"} // Replace with a default avatar URL if mentor.avatar is null
-                alt={`${mentor.firstname} ${mentor.lastname}`}
+                alt={`${mentor.firstname || 'Mentor'} ${mentor.lastname || ''}`}
                 className="rounded-full w-32 h-32 object-cover mb-4"
               />
               <h2 className="text-xl font-semibold text-gray-900">
-                {mentor.firstname} {mentor.lastname}
+                {mentor.firstname || 'First Name'} {mentor.lastname || 'Last Name'}
               </h2>
-              <p className="text-gray-600">{mentor.username}</p>
+              <p className="text-gray-600">{mentor.username || 'Username'}</p>
               <p className="text-gray-600 text-center mt-4">
-                Interests: {mentor.interest.join(", ")}
+                Interests: {Array.isArray(mentor.interest) ? mentor.interest.join(", ") : 'N/A'}
               </p>
 
               {/* Optional: Display email, phone number, or other fields */}
-              <p className="text-gray-600">Email: {mentor.email}</p>
-              <p className="text-gray-600">Phone: {mentor.phone_number}</p>
+              <p className="text-gray-600">Email: {mentor.email || 'N/A'}</p>
+              <p className="text-gray-600">Phone: {mentor.phone_number || 'N/A'}</p>
             </div>
           ))}
         </div>

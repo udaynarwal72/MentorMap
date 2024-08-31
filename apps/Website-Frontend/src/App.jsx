@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 // import './App.css'
 import NavBar from './components/NavBar/NavBar'
 import io from "socket.io-client";
+import GenerateMeetLinkPage from './pages/User/GenerateMeetLinkPage';
 const ENDPOINT = 'http://localhost:3000';
 var socket, selectedChatCompare;
 

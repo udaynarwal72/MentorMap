@@ -44,6 +44,5 @@ router.post('/chat', async (req, res) => {
 //   });
 
 router.use("/api/v1/user", UserRouter);
-router.use("/api/v1/blog", BlogRouter);
 
 export default router;

@@ -85,19 +85,7 @@ const router = createBrowserRouter([
   {
     path:"/userchat",
     element:<Chat/>
-  },
-  {
-    path:"/blogdetails",
-    element:<BlogDetails/>
-  },
-  {
-    path:"/s2s",
-    element:<StudentStudentCommunity/>
-  },
-  {
-    path:"/s2m",
-    element:<StudentMentorCommunity/>
-  },
+  }
 ]);
 
 
