@@ -20,10 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(router);
-app.use(cors({
-    origin: '*', // Allow all origins for testing
-    credentials: true
-  }));
+
   
 
 // Connect to MongoDB
