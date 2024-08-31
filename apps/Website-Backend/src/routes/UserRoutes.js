@@ -11,6 +11,6 @@ UserRouter.post("/userlogin", userLogin);
 UserRouter.get("/checkauth", verifyJWT, checkAuthentication);
 UserRouter.get("/findbyid/:userId", verifyJWT, findUserById);
 UserRouter.delete("/delete/:userId",verifyJWT, deleteUserById);
-UserRouter.get("/bulk",findAllUser)
+UserRouter.get("/bulk" , findAllUser)
 
 export default UserRouter;

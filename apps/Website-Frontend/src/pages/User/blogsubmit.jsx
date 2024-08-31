@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar"; 
-import Footer from "../../components/NavBar/Footer";
+
 const BlogSubmitForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate(); // Corrected: Added useNavigate for redirection
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +32,9 @@ const BlogSubmitForm = () => {
       // Make API call to submit the blog post
       const response = await axios.post("http://localhost:3000/api/v1/blog/postblog", {
         title,
-        content,
+        description: content,
+      },{
+        withCredentials: true // Corrected: Changed credentials:true to withCredentials: true
       });
 
       if (response.data.success) {
@@ -38,7 +42,7 @@ const BlogSubmitForm = () => {
         // Clear the form
         setTitle("");
         setContent("");
-        navigate("/blogpage");
+        navigate("/blogpage"); // Corrected: Use navigate for redirection
       } else {
         setErrors({ apiError: response.data.message || "Failed to submit the blog post." });
       }
@@ -102,7 +106,6 @@ const BlogSubmitForm = () => {
           </form>
         </div>
       </div>
-      <Footer/>
     </>
   );
 };
