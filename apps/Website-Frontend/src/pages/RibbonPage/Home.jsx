@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserGraduate, FaChalkboardTeacher } from 'react-icons/fa';
 import { HiOutlineInformationCircle, HiOutlineMail } from 'react-icons/hi';
 import NavBar from "../../components/NavBar/NavBar";
 
 const Home = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center text-white relative">
       {/* Navigation Bar */}
-      <NavBar/>
+      <NavBar />
 
       {/* Hero Section */}
       <header className="flex flex-col items-center justify-center space-y-4 pt-32 text-center">
@@ -38,7 +44,7 @@ const Home = () => {
 
       {/* Why Choose Us Section */}
       <section className="mt-16 max-w-screen-lg px-6 text-center space-y-8">
-        <h2 className="text-3xl font-bold text-blue-100">Why Choose MentorConnect?</h2>
+        <h2 className="text-3xl font-bold text-blue-100">Why Choose MentorSync?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex flex-col items-center bg-blue-600 p-4 rounded-lg shadow-md ">
             <FaChalkboardTeacher className="text-4xl text-blue-300 mb-2" />
@@ -54,6 +60,36 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* "Have any doubts?" Button */}
+      <div className="fixed bottom-10 right-10">
+        <button
+          onClick={togglePopup}
+          className="flex items-center justify-center p-4 bg-blue-600 hover:bg-blue-500 rounded-full shadow-lg text-lg font-medium transition transform hover:scale-105"
+        >
+          <HiOutlineMail className="text-3xl text-blue-300 mr-2" />
+          Have any doubts?
+        </button>
+      </div>
+
+      {/* Pop-up Modal */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-black w-96">
+            <h2 className="text-2xl font-bold mb-4">We're here to help!</h2>
+            <p className="mb-4">If you have any questions or need assistance, feel free to use our chat bot.</p>
+            <Link to="/chat" className="text-blue-600 hover:underline">
+              Click here for chat bot!
+            </Link>
+            <button
+              onClick={togglePopup}
+              className="mt-4 w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="mt-16 py-6 bg-blue-900 w-full text-center text-blue-300 text-sm">

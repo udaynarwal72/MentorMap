@@ -19,9 +19,9 @@ import BlogSubmitForm from './pages/User/Blogsubmit.jsx';
 import Community from './pages/User/CommunityPage.jsx';
 import FAQ from './pages/User/faq.jsx';
 import MentorList from './pages/User/Mentorlist.jsx';
-import VideoCall from './pages/User/VideoCall.jsx';
 import MentorCal from './pages/MentorCal/MentorCall.jsx';
 import Chat from './Chat/index.jsx';
+import VideoCall from './pages/User/videoCall.jsx';
 
 const router = createBrowserRouter([
   {
