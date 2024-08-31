@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect,useState } from "react";
+import { FaStar } from "react-icons/fa";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/NavBar/Footer";
 

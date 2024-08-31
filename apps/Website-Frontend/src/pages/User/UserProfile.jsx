@@ -74,7 +74,6 @@ const UserProfile = () => {
             </div>
             <div className="">
               <InlineWidget
-                  
                 url={`https://${user.usercalendlyurl}`} styles={{ height: '600px' }} />
             </div>
           </div>

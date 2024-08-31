@@ -151,10 +151,25 @@ const findUserById = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findByIdAndDelete(id);
+        if (!user) {
+            return res.status(404).send({ error: "User not found" });
+        }
+        res.send({ user });
+
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        res.status(500).send({ error: "An error occurred while deleting the user" });
+    }
+}
+
 const findAllUser = async (req, res) => {
     try {
         const users = await User.find();
-        res.status(200).json({ data: users });
+        res.status(200).json(new ApiResponse(200, users, "All users fetched successfully"));
     } catch (error) {
         console.error("Error finding user:", error);
         res.status(500).send({ error: "An error occurred while fetching the user" });
@@ -178,6 +193,21 @@ const deleteUserById = async (req, res) => {
     }
 }
 
+const allowUserByAdmin = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const user = await User.findByIdAndUpdate(userId, { userIsVerified: true }, { new: true });
+        if (!user) {
+            return res.status(404).send({ error: "User not found" });
+        }
+        res.send({ user });
+
+    } catch (error) {
+        console.error("Error allowing user:", error);
+        res.status(500).send({ error: "An error occurred while allowing the user" });
+    }
+}
+
 
 export {
     userSignUp,
@@ -185,5 +215,6 @@ export {
     checkAuthentication,
     findUserById,
     deleteUserById,
-    findAllUser
+    findAllUser,
+    allowUserByAdmin
 }

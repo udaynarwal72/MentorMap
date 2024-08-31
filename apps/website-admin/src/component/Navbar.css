@@ -1,0 +1,31 @@
+/* Navbar.css */
+
+.navbar {
+    background-color: #2d3748; /* Equivalent to bg-gray-800 in Tailwind */
+    padding: 1rem; /* Equivalent to p-4 in Tailwind */
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto; /* Equivalent to container mx-auto in Tailwind */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Equivalent to flex justify-between items-center in Tailwind */
+}
+
+.brand .nav-link {
+    color: #ffffff; /* Equivalent to text-white in Tailwind */
+    font-size: 1.125rem; /* Equivalent to text-lg in Tailwind */
+    font-weight: 600; /* Equivalent to font-semibold in Tailwind */
+    text-decoration: none;
+}
+
+.nav-links .nav-link {
+    margin-left: 1rem; /* Equivalent to space-x-4 in Tailwind */
+    color: #a0aec0; /* Equivalent to text-gray-300 in Tailwind */
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #ffffff; /* Equivalent to hover:text-white or hover:text-gray-400 in Tailwind */
+}

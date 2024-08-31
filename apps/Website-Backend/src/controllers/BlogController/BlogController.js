@@ -1,0 +1,30 @@
+import Blog from "../../schema/BlogSchema.js";
+import ApiResponse from "../../utils/ApiResponse.js";
+
+const getAllBlogs = async (req, res) => {
+    try {
+        const blogs = await Blog.find().populate("createdBy", "username avatar");
+        res.status(200).json(new ApiResponse(200, blogs, "All blogs fetched successfully"));
+    } catch (error) {
+        console.error("Error finding blogs:", error);
+        res.status(500).send({ error: "An error occurred while fetching the blogs" });
+    }
+}
+
+const postBlog = async (req, res) => {
+    const { title, description } = req.body;
+    const createdBy = req.user._id;
+    try {
+        const blog = new Blog({ title, description, createdBy });
+        await blog.save();
+        res.status(201).json(new ApiResponse(200, blog, "Blog created successfully"));
+    } catch (error) {
+        console.error("Error creating blog:", error);
+        res.status(500).send({ error: "An error occurred while creating the blog" });
+    }
+}
+
+export {
+    getAllBlogs,
+    postBlog
+}

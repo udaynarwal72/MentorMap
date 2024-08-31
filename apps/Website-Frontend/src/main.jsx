@@ -21,7 +21,9 @@ import FAQ from './pages/User/faq.jsx';
 import MentorList from './pages/User/Mentorlist.jsx';
 import MentorCal from './pages/MentorCal/MentorCall.jsx';
 import Chat from './Chat/index.jsx';
-import VideoCall from './pages/User/videoCall.jsx';
+import BlogDetails from './pages/User/Blogdetails.jsx';
+import StudentStudentCommunity from './pages/User/s2s.jsx';
+import StudentMentorCommunity from './pages/User/s2m.jsx';import VideoCall from './pages/User/videoCall.jsx';
 
 const router = createBrowserRouter([
   {
@@ -83,7 +85,19 @@ const router = createBrowserRouter([
   {
     path:"/userchat",
     element:<Chat/>
-  }
+  },
+  {
+    path:"/blogdetails",
+    element:<BlogDetails/>
+  },
+  {
+    path:"/s2s",
+    element:<StudentStudentCommunity/>
+  },
+  {
+    path:"/s2m",
+    element:<StudentMentorCommunity/>
+  },
 ]);
 
 
