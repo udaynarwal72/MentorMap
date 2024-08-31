@@ -1,53 +1,42 @@
-import React from "react";
-import { FaVideoSlash, FaMicrophoneSlash } from "react-icons/fa";
-import { HiOutlineChat } from "react-icons/hi";
-import { MdScreenShare, MdOutlineDraw } from "react-icons/md"; // Icons for screen share and whiteboard
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/NavBar/Footer";
 
-const VideoCall = () => {
+const VideoCall = () => {  // Capitalized the component name
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleConfirm = () => {
+    setIsConfirmed(true);
+    // Redirect to the WebRTC video call page
+    navigate('/start-video-call');
+  };
+
   return (
-    <div className="min-h-screen bg-blue-900 flex flex-col text-gray-800">
-      {/* Video Call Section */}
-      <section className="flex flex-col items-center justify-center flex-grow px-6 mt-16">
-        <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="relative">
-            <video className="w-full h-72 object-cover bg-gray-200" autoPlay muted>
-              {/* Video stream should be inserted here */}
-            </video>
-            <div className="absolute top-4 right-4 flex space-x-4">
-              <button className="p-2 bg-indigo-500 rounded-full hover:bg-indigo-400 transition">
-                <MdScreenShare className="text-xl text-white" />
-              </button>
-              <button className="p-2 bg-teal-500 rounded-full hover:bg-teal-400 transition">
-                <MdOutlineDraw className="text-xl text-white" />
-              </button>
-              <button className="p-2 bg-purple-500 rounded-full hover:bg-purple-400 transition">
-                <HiOutlineChat className="text-xl text-white" />
-              </button>
-            </div>
-          </div>
-
-          {/* Call Controls */}
-          <div className="flex justify-between mt-4 px-4 py-2 bg-gray-100 rounded-b-lg">
-            <button className="flex items-center space-x-2 bg-red-500 p-2 rounded-lg hover:bg-red-400 transition">
-              <FaVideoSlash className="text-xl text-white" />
-              <span>Turn Off Video</span>
-            </button>
-            <button className="flex items-center space-x-2 bg-yellow-500 p-2 rounded-lg hover:bg-yellow-400 transition">
-              <FaMicrophoneSlash className="text-xl text-white" />
-              <span>Mute</span>
-            </button>
-            <button className="flex items-center space-x-2 bg-red-600 p-2 rounded-lg hover:bg-red-500 transition">
-              <span>End Call</span>
-            </button>
-          </div>
+  <>
+    <NavBar/>
+    <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center justify-center text-white">
+      
+      {!isConfirmed ? (
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-8">Do you wish to start a video call?</h1>
+          <button
+            onClick={handleConfirm}
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-full text-lg font-medium transition transform hover:scale-105"
+          >
+            Yes, Connect
+          </button>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-6 bg-blue-800 w-full text-center text-white text-sm mt-auto">
-        © 2024 MentorConnect. All rights reserved.
-      </footer>
+      ) : (
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-8">Connecting...</h1>
+          {/* Optionally, add a loader or a transition effect here */}
+        </div>
+      )}
     </div>
+    <Footer/>
+  </>
   );
 };
 
