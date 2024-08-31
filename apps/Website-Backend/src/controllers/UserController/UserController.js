@@ -151,6 +151,16 @@ const findUserById = async (req, res) => {
     }
 };
 
+const findAllUser = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).send({ data: users });
+    } catch (error) {
+        console.error("Error finding user:", error);
+        res.status(500).send({ error: "An error occurred while fetching the user" });
+    }
+}
+
 const deleteUserById = async (req, res) => {
     const { userId } = req.params;
     try {
@@ -174,5 +184,6 @@ export {
     userLogin,
     checkAuthentication,
     findUserById,
-    deleteUserById
+    deleteUserById,
+    findAllUser
 }
