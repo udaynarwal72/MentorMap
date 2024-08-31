@@ -14,8 +14,8 @@ import ContactUs from './pages/RibbonPage/ContactUs.jsx';
 import Home from './pages/RibbonPage/Home.jsx';
 import UserSignUp from './pages/User/SignUp.jsx';
 import Chatbot from './pages/RibbonPage/Chatbot.jsx';
-import BlogPage from './pages/User/Blogpage.jsx';
-import BlogSubmitForm from './pages/User/Blogsubmit.jsx';
+import BlogPage from './pages/User/blogpage.jsx';
+import BlogSubmitForm from './pages/User/blogsubmit.jsx';
 import Community from './pages/User/CommunityPage.jsx';
 import FAQ from './pages/User/faq.jsx';
 import MentorList from './pages/User/Mentorlist.jsx';
@@ -85,7 +85,23 @@ const router = createBrowserRouter([
   {
     path:"/userchat",
     element:<Chat/>
+<<<<<<< Updated upstream
   }
+=======
+  },
+  {
+    path:"/blogdetails/:id",
+    element:<BlogDetails/>
+  },
+  {
+    path:"/s2s",
+    element:<StudentStudentCommunity/>
+  },
+  {
+    path:"/s2m",
+    element:<StudentMentorCommunity/>
+  },
+>>>>>>> Stashed changes
 ]);
 
 

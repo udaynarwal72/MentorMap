@@ -36,7 +36,7 @@ const BlogSubmitForm = () => {
       },{
         withCredentials: true // Corrected: Changed credentials:true to withCredentials: true
       });
-
+      console.log(response)
       if (response.data.success) {
         setSuccessMessage("Blog post submitted successfully!");
         // Clear the form
