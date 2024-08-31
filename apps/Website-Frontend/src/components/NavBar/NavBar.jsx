@@ -1,14 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { authState, checkAuthSelector } from "../../recoil/Authuser";
-import { useEffect, useState } from "react";
-import { FaUserCircle, FaSearch } from 'react-icons/fa'; // Importing icons from react-icons
+import { useEffect } from "react";
+import { FaUserCircle } from 'react-icons/fa'; // Importing icons from react-icons
 import Cookies from "js-cookie";
 
 const NavBar = () => {
     const authStatus = useRecoilValueLoadable(checkAuthSelector);
     const [auth, setAuth] = useRecoilState(authState);
-    const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,16 +15,6 @@ const NavBar = () => {
             setAuth(authStatus.contents);
         }
     }, [authStatus.state, authStatus.contents, setAuth]);
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        // Handle search logic here
-        console.log("Searching for mentors with query:", searchQuery);
-    };
 
     const handleLogout = () => {
         // Clear auth state and navigate to login or home page
@@ -76,18 +65,6 @@ const NavBar = () => {
                         </Link>
                     </li>
                 </ul>
-
-                {/* Search Bar */}
-                <form onSubmit={handleSearchSubmit} className="relative w-full max-w-xs hidden md:flex">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        placeholder="Search for mentors..."
-                        className="w-full p-3 pl-12 border border-blue-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
-                </form>
 
                 {/* User Profile or Login */}
                 <div className="flex items-center space-x-4 md:space-x-6">
