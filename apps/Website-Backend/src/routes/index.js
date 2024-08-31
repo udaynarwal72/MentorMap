@@ -1,6 +1,7 @@
 import Express, { response } from "express";
 import UserRouter from "./UserRoutes.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import BlogRouter from "./BlogRoutes.js";
 const router = Express.Router();
 
 router.get("/", (req, res) => {
@@ -28,5 +29,6 @@ router.post('/chat', async (req, res) => {
 //   });
 
 router.use("/api/v1/user", UserRouter);
+router.use("/api/v1/blog", BlogRouter);
 
 export default router;

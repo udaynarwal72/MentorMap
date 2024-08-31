@@ -1,107 +1,34 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { FaStar } from "react-icons/fa";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/NavBar/Footer";
 const MentorList = () => {
-  const mentors = [
-    {
-      id: 1,
-      name: "ABCDEF",
-      title: "Senior Software Engineer",
-      bio: "10+ years of experience in full-stack development.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-    {
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },{
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },{
-      id: 2,
-      name: "QWIQWD",
-      title: "Data Scientist",
-      bio: "Expert in machine learning and data analytics.",
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZTK04q5MAb3xxGj9xiBt-rOefqwu5X4jtg&s",
-      rating: 4.7,
-    },
-  ];
+
 
   // const MentorList = () => {
-  
-  //   const [mentors, setMentors] = useState([]);
-  //   const [loading, setLoading] = useState(true); 
-  //   const [error, setError] = useState(null); 
-  
-    
-  //   useEffect(() => {
-  //     const fetchMentors = async () => {
-  //       try {
-  //         const response = await fetch("/mentorlist");
-  //         if (!response.ok) {
-  //           throw new Error("Failed to fetch mentors");
-  //         }
-  //         const data = await response.json();
-  //         setMentors(data);
-  //       } catch (err) {
-  //         setError(err.message);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  
-  //     fetchMentors();
-  //   }, []);
-  
+
+    const [mentors, setMentors] = useState([]);
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
+
+  useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/v1/user/bulk");
+        if (!response.ok) {
+          throw new Error("Failed to fetch mentors");
+        }
+        console.log(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMentors();
+  }, []);
+
   //   if (loading) return <div>Loading...</div>; 
   //   if (error) return <div>Error: {error}</div>; 
 
@@ -131,17 +58,16 @@ const MentorList = () => {
               </h2>
               <p className="text-gray-600">{mentor.title}</p>
               <p className="text-gray-600 text-center mt-4">{mentor.bio}</p>
-              
+
               {/* Rating */}
               <div className="flex items-center mt-4">
                 {Array.from({ length: 5 }, (_, index) => (
                   <FaStar
                     key={index}
-                    className={`text-xl ${
-                      index < Math.floor(mentor.rating)
+                    className={`text-xl ${index < Math.floor(mentor.rating)
                         ? "text-yellow-500"
                         : "text-gray-300"
-                    }`}
+                      }`}
                   />
                 ))}
                 <span className="ml-2 text-gray-600">{mentor.rating}</span>
@@ -152,7 +78,7 @@ const MentorList = () => {
       </section>
 
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -154,7 +154,7 @@ const findUserById = async (req, res) => {
 const findAllUser = async (req, res) => {
     try {
         const users = await User.find();
-        res.status(200).send({ data: users });
+        res.status(200).json(new ApiResponse(200, users, "All users fetched successfully"));
     } catch (error) {
         console.error("Error finding user:", error);
         res.status(500).send({ error: "An error occurred while fetching the user" });
