@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ const UserSignUp = () => {
   const [interests, setInterests] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [skills, setSkills] = useState("");
   const navigate = useNavigate();
 
   const onHandleSubmit = async (e) => {
@@ -27,20 +28,37 @@ const UserSignUp = () => {
       return;
     }
     setLoading(true);
+
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/user/usersignup', {
-        email,
-        password,
-        username,
-        firstName,
-        lastName,
-        phoneNumber,
-        userRole,
-        interests
+      const skillsString = interests.map(interest => interest.value).join(",");
+      setSkills(skillsString);
+
+      // Create a FormData object
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('username', username);
+      formData.append('firstname', firstName);
+      formData.append('confirm_password', confirmPassword);
+      formData.append('lastname', lastName);
+      formData.append('phone_number', phoneNumber);
+      formData.append('user_role', userRole);
+      formData.append('interest', skillsString);
+
+      // Append the avatar file
+      const avatarFile = document.getElementById('avatar').files[0];
+      if (avatarFile) {
+        formData.append('avatar', avatarFile);
+      }
+
+      const response = await axios.post('http://localhost:3000/api/v1/user/usersignup', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-      if (response.data.success) {
-        Cookies.set('accessToken', `${response.data.data.accessToken}`, { expires: 7 });
-        window.location.href = '/';
+      console.log(response);
+      if (response.status === 200) {
+        window.location.href = '/login';
       } else {
         setErrorMessage(response.data.data.message);
       }
@@ -50,6 +68,11 @@ const UserSignUp = () => {
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+    console.log('Skills updated:', skills);
+  }, [skills]);
 
   return (
     <>
@@ -127,7 +150,7 @@ const UserSignUp = () => {
               <Tags
                 tagifyRef={(el) => el && el.DOM.scope.setAttribute('style', 'max-height: 300px; overflow-y: auto;')}
                 value={interests}
-                onChange={(e) => setInterests(e.detail.tagify.value.map(tag => tag.value))}
+                onChange={(e) => setInterests(e.detail.tagify.value)}
                 settings={{
                   maxTags: 10,
                   placeholder: 'Select multiple skills',
@@ -143,8 +166,8 @@ const UserSignUp = () => {
             </div>
             <input
               type="file"
-              id="image"
-              name="image"
+              id="avatar"
+              name="avatar"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <div className="flex space-x-4">

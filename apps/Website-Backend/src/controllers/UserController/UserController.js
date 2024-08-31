@@ -17,6 +17,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
 const userSignUp = async (req, res) => {
     try {
+        console.log(req.body);
         const {
             username,
             password,
@@ -28,7 +29,7 @@ const userSignUp = async (req, res) => {
             interest,
             confirm_password
         } = req.body;
-
+        console.log(req.files);
         if (password !== confirm_password) {
             return res.status(400).send({ message: "Passwords do not match" });
         }
@@ -54,7 +55,7 @@ const userSignUp = async (req, res) => {
         //     unlinkSync(avatarPath);
         // }
         // Generate an array of interests from a comma-separated string
-        const generatedInterest = interest.split(",");
+        const generatedSkills = interest.split(",");
 
         // Create a new user record
         const user = await User.create({
@@ -66,11 +67,11 @@ const userSignUp = async (req, res) => {
             email,
             avatar: userAvatarImageUrl ? userAvatarImageUrl.secure_url : null,
             user_role,
-            interest: generatedInterest,
+            skills: generatedSkills,
         });
 
         // Send a success message with the created user
-        res.status(201).send({ message: "User created successfully", user });
+        res.status(200).send({ message: "User created successfully", user });
     } catch (error) {
         console.error("Error creating user:", error);
         res.status(500).send({ message: "An error occurred during user creation", error });
