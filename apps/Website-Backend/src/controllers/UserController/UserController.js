@@ -27,7 +27,8 @@ const userSignUp = async (req, res) => {
             email,
             user_role,
             interest,
-            confirm_password
+            confirm_password,
+            usercalendlyurl
         } = req.body;
         console.log(req.files);
         if (password !== confirm_password) {
@@ -68,6 +69,7 @@ const userSignUp = async (req, res) => {
             avatar: userAvatarImageUrl ? userAvatarImageUrl.secure_url : null,
             user_role,
             skills: generatedSkills,
+            usercalendlyurl
         });
 
         // Send a success message with the created user
@@ -138,7 +140,7 @@ const findUserById = async (req, res) => {
     try {
         const user = await User.findById(userId);  // Added await to handle the asynchronous call
 
-        if (!user) {  // Check if user is not found
+        if (!user) {  // Check if user is not found 
             return res.status(404).send({ error: "User not found" });
         }
 
@@ -148,6 +150,16 @@ const findUserById = async (req, res) => {
         res.status(500).send({ error: "An error occurred while fetching the user" });
     }
 };
+
+const findAllUser = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).send({ data: users });
+    } catch (error) {
+        console.error("Error finding user:", error);
+        res.status(500).send({ error: "An error occurred while fetching the user" });
+    }
+}
 
 const deleteUserById = async (req, res) => {
     const { userId } = req.params;
@@ -172,5 +184,6 @@ export {
     userLogin,
     checkAuthentication,
     findUserById,
-    deleteUserById
+    deleteUserById,
+    findAllUser
 }

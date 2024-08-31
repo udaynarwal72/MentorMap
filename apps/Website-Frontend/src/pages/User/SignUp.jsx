@@ -19,6 +19,7 @@ const UserSignUp = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [skills, setSkills] = useState("");
+  const [usercalendlyurl, setUsercalendlyurl] = useState("");
   const navigate = useNavigate();
 
   const onHandleSubmit = async (e) => {
@@ -44,6 +45,7 @@ const UserSignUp = () => {
       formData.append('phone_number', phoneNumber);
       formData.append('user_role', userRole);
       formData.append('interest', skillsString);
+      formData.append('usercalendlyurl', usercalendlyurl);
 
       // Append the avatar file
       const avatarFile = document.getElementById('avatar').files[0];
@@ -121,6 +123,16 @@ const UserSignUp = () => {
               name="email"
               placeholder="Email"
               value={email}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              id="usercalendlyurl"
+              onChange={(e) => setUsercalendlyurl(e.target.value)}
+              name="usercalendlyurl"
+              placeholder="calendly.com/username"
+              value={usercalendlyurl}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
