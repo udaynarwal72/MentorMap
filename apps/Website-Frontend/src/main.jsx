@@ -20,6 +20,8 @@ import Community from './pages/User/CommunityPage.jsx';
 import FAQ from './pages/User/faq.jsx';
 import MentorList from './pages/User/Mentorlist.jsx';
 import VideoCall from './pages/User/VideoCall.jsx';
+import MentorCal from './pages/MentorCal/MentorCall.jsx';
+import Chat from './Chat/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,13 @@ const router = createBrowserRouter([
   ,{
     path:"/videocall",
     element:<VideoCall/>
+  },{
+    path:"/mentorcal",
+    element:<MentorCal/>
+  },
+  {
+    path:"/userchat",
+    element:<Chat/>
   }
 ]);
 

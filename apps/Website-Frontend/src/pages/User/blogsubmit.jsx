@@ -88,7 +88,6 @@ const BlogSubmitForm = () => {
         </form>
       </div>
     </div>
-    <Footer />
     </>
   );
 };
