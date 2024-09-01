@@ -1,5 +1,5 @@
 import Express from "express";
-import { allowUserByAdmin, checkAuthentication, deleteUserById, findAllUser, findUserById, userLogin, userSignUp } from "../controllers/UserController/UserController.js";
+import { allowUserByAdmin, checkAuthentication, deleteUserById, findAllUser, findUserById, getUserById, userLogin, userSignUp } from "../controllers/UserController/UserController.js";
 import verifyJWT from "../middlewares/Auth.middleware.js"
 import { upload } from "../middlewares/Multer.middleware.js";
 const UserRouter = Express.Router();
@@ -13,5 +13,6 @@ UserRouter.get("/findbyid/:userId", verifyJWT, findUserById);
 UserRouter.get("/bulk", findAllUser);
 UserRouter.put("/allow/:userId", allowUserByAdmin);
 UserRouter.delete("/delete/:userId", deleteUserById);
+UserRouter.get("/findbyid/:userId", getUserById);
 
 export default UserRouter;

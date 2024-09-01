@@ -22,7 +22,8 @@ export function SocketProvider({ children }) {
         // userSocket is used for auth and login 
         // chatSocket is used for chat events
         let userSocket, chatSocket;
-        userSocket = io('http://localhost:8000/user');
+        console.log('hi');
+        userSocket = io('http://localhost:8080/user');
         userSocket.on("connect", () => {
             if (!isEmpty(token)) {
                 const user = auth.user;

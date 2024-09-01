@@ -39,7 +39,7 @@ const BlogPage = () => {
             {articles.map((article) => (
               <div key={article._id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-2">{article.title}</h2>
-                <p className="text-gray-600 mb-4 line-clamp-2">{article.description}</p>
+                <p className="text-gray-600 mb-4 line-clamp-5">{article.description}</p>
 
                 <Link
                   to={`/blogdetails/${article._id}`}

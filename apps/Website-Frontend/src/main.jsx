@@ -23,7 +23,7 @@ import MentorCal from './pages/MentorCal/MentorCall.jsx';
 import Chat from './Chat/index.jsx';
 import BlogDetails from './pages/User/Blogdetails.jsx';
 import StudentStudentCommunity from './pages/User/s2s.jsx';
-import StudentMentorCommunity from './pages/User/s2m.jsx';import VideoCall from './pages/User/videoCall.jsx';
+import StudentMentorCommunity from './pages/User/s2m.jsx'; import VideoCall from './pages/User/videoCall.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,71 +37,68 @@ const router = createBrowserRouter([
   {
     path: '/user/:userId',
     element: <UserProfile />
-  },{
-    path:"/about",
-    element:<About/>
-  },{
-    path:"/contact",
-    element:<ContactUs/>
-  },{
-    path:"/home",
-    element:<App/>
+  }, {
+    path: "/about",
+    element: <About />
+  }, {
+    path: "/contact",
+    element: <ContactUs />
+  }, {
+    path: "/home",
+    element: <App />
   },
   {
-    path:"/signup",
-    element:<UserSignUp/>
+    path: "/signup",
+    element: <UserSignUp />
   },
   {
-    path:"/chat",
-    element:<Chatbot/>
+    path: "/chat",
+    element: <Chatbot />
   }
-  ,{
-    path:"/blogpage",
-    element:<BlogPage/>
+  , {
+    path: "/blogpage",
+    element: <BlogPage />
   }
-  ,{
-    path:"/blogsubmit",
-    element:<BlogSubmitForm/>
+  , {
+    path: "/blogsubmit",
+    element: <BlogSubmitForm />
   }
-  ,{
-    path:"/communitypage",
-    element:<Community/>
+  , {
+    path: "/communitypage",
+    element: <Community />
   }
-  ,{
-    path:"/faq",
-    element:<FAQ/>
+  , {
+    path: "/faq",
+    element: <FAQ />
   }
-  ,{
-    path:"/mentorlist",
-    element:<MentorList/>
+  , {
+    path: "/mentorlist",
+    element: <MentorList />
   }
-  ,{
-    path:"/videocall",
-    element:<VideoCall/>
-  },{
-    path:"/mentorcal",
-    element:<MentorCal/>
+  , {
+    path: "/videocall",
+    element: <VideoCall />
   },
   {
-    path:"/userchat",
-    element:<Chat/>
-<<<<<<< Updated upstream
-  }
-=======
+    path: "/mentorcal",
+    element: <MentorCal />
   },
   {
-    path:"/blogdetails/:id",
-    element:<BlogDetails/>
+    path: "/connectwithmentor/:id",
+    element: <Chat />
   },
   {
-    path:"/s2s",
-    element:<StudentStudentCommunity/>
+    path: "/blogdetails/:id",
+    element: <BlogDetails />
   },
   {
-    path:"/s2m",
-    element:<StudentMentorCommunity/>
+    path: "/s2s",
+    element: <StudentStudentCommunity />
   },
->>>>>>> Stashed changes
+  {
+    path: "/s2m",
+    element: <StudentMentorCommunity />
+  },
 ]);
 
 

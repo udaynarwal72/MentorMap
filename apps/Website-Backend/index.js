@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 3000; // Provide a fallback port
 
 // Middleware
-app.use(cors({ origin: ["http://localhost:5173","http://localhost:8000"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:5173","http://localhost:3000"], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

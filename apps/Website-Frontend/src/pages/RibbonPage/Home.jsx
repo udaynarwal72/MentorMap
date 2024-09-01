@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaUserGraduate, FaChalkboardTeacher } from 'react-icons/fa';
 import { HiOutlineInformationCircle, HiOutlineMail } from 'react-icons/hi';

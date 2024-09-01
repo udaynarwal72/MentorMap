@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSocket } from '../contexts/SocketProvider';
 import { useUser } from '../contexts/UserProvider';
 import { isEmpty } from 'lodash';
 import { Badge } from 'reactstrap';
 import { useChat } from '../contexts/ChatProvider';
 import CreateGroup from './CreateGroup';
+import { useParams } from 'react-router-dom';
 
 export default function ChatList() {
     const { chatSocket } = useSocket();
     const [search, setSearch] = useState([]);
     const [searchEmail, setSearchEmail] = useState("")
     const [showCreateGroup, setShowCreateGroup] = useState(false)
-
+    const [useremail, setUserEmail] = useState("");
     const { activeChat, messageQueue, setActiveChat } = useChat();
     const { user, chatList } = useUser();
 
@@ -44,28 +45,38 @@ export default function ChatList() {
     const alreadyChatPresent = (id) => {
         let isPresent = false;
         const chat = chatList.forEach((chat) => {
-            if(chat.chatType === 'group') return;
+            if (chat.chatType === 'group') return;
             chat.users.forEach((user) => {
-                if(user._id === id) isPresent = true;
+                if (user._id === id) isPresent = true;
             })
         });
         return isPresent;
     }
-    const logOut = ()=>{
+    const logOut = () => {
         localStorage.removeItem('token');
         window.location.reload();
     }
+    useEffect(async () => {
+        const { id } = useParams();
+        const response = await fetch(`http://localhost:3000/api/chat/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        setUserEmail(response.data.email);
+    }, []);
     return (
         <div className="bg-gray-900 p-4 text-white h-[100vh] max-h-[100vh] overflow-y-scroll">
             <div className='relative'>
                 <div className="flex flex-col">
                     <div className='relative flex justify-between'>
-                        <input type='text' placeholder='Search users by email' value={searchEmail} onChange={(e) => searchUsers(e.target.value)} className='w-[70%] h-[35px] px-2 rounded focus:outline-none text-black' />
+                        <input type='text' placeholder='Search users by email' defaultValue={useremail} value={searchEmail} onChange={(e) => searchUsers(e.target.value)} className='w-[70%] h-[35px] px-2 rounded focus:outline-none text-black' />
                         <button className='w-[25%] px-3 text-gray-900 bg-gray-100 rounded cursor-pointer' onClick={logOut}>Log Out</button>
                         <div className="absolute bg-purple-600 w-full top-[110%]">
                             {
                                 !showCreateGroup && search.map((user, index) => {
-                                    if(alreadyChatPresent(user._id)) return <></>;
+                                    if (alreadyChatPresent(user._id)) return <></>;
                                     return (
                                         <div key={index} onClick={() => addToChat(user)} className='flex items-center py-2 px-4 border-b border-white w-full cursor-pointer hover:bg-purple-700 transition-all duration-200'>
                                             <img src={user.profilePic} className='h-10 rounded' />

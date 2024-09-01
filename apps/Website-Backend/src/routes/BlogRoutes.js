@@ -5,7 +5,7 @@ import { upload } from "../middlewares/Multer.middleware.js";
 const BlogRouter = Express.Router();
 
 BlogRouter.post("/postblog", verifyJWT, postBlog);
-BlogRouter.get("/bulk", getAllBlogs);
+BlogRouter.get("/bulk", getAllBlogs) 
 BlogRouter.get("/getblogbyid/:id",getBlogById)
 
 export default BlogRouter;

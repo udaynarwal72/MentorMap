@@ -208,6 +208,15 @@ const allowUserByAdmin = async (req, res) => {
     }
 }
 
+const getUserById = (req, res) => {
+    const { userId } = req.params;
+    User.findById(userId, (err, user) => {
+        if (err) {
+            res.status(500).send({ error: "An error occurred while fetching the user" });
+        }
+        res.send({ user });
+    });
+}
 
 export {
     userSignUp,
@@ -216,5 +225,6 @@ export {
     findUserById,
     deleteUserById,
     findAllUser,
-    allowUserByAdmin
+    allowUserByAdmin,
+    getUserById
 }
