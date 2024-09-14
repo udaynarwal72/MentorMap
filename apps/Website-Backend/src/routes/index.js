@@ -3,7 +3,7 @@ import UserRouter from "./UserRoutes.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import BlogRouter from "./BlogRoutes.js";
 import axios from "axios";
-import {Videocallroutes} from "./Videocallroutes.js";
+import FaqRoutes from "./FaqRoutes.js";
 const router = Express.Router();
 
 router.get("/", (req, res) => {
@@ -37,5 +37,7 @@ router.post('/chat', async (req, res) => {
 
 router.use("/api/v1/user", UserRouter);
 router.use("/api/v1/blog", BlogRouter);
+router.use('/api/v1/community', FaqRoutes);
+
 // router.use("/api/v1/videocall",Videocallroutes);
 export default router;
